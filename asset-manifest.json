@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Carongo-Web/static/css/main.04a8df01.chunk.css",
+    "main.js": "/Carongo-Web/static/js/main.a04c4ae7.chunk.js",
+    "main.js.map": "/Carongo-Web/static/js/main.a04c4ae7.chunk.js.map",
+    "runtime-main.js": "/Carongo-Web/static/js/runtime-main.fce40b46.js",
+    "runtime-main.js.map": "/Carongo-Web/static/js/runtime-main.fce40b46.js.map",
+    "static/js/2.726216ea.chunk.js": "/Carongo-Web/static/js/2.726216ea.chunk.js",
+    "static/js/2.726216ea.chunk.js.map": "/Carongo-Web/static/js/2.726216ea.chunk.js.map",
+    "index.html": "/Carongo-Web/index.html",
+    "precache-manifest.b8161d7fd55e16e6c5f10754a9b96309.js": "/Carongo-Web/precache-manifest.b8161d7fd55e16e6c5f10754a9b96309.js",
+    "service-worker.js": "/Carongo-Web/service-worker.js",
+    "static/css/main.04a8df01.chunk.css.map": "/Carongo-Web/static/css/main.04a8df01.chunk.css.map",
+    "static/js/2.726216ea.chunk.js.LICENSE.txt": "/Carongo-Web/static/js/2.726216ea.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/Carongo-Web/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fce40b46.js",
+    "static/js/2.726216ea.chunk.js",
+    "static/css/main.04a8df01.chunk.css",
+    "static/js/main.a04c4ae7.chunk.js"
+  ]
+}
