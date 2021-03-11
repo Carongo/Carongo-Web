@@ -5,14 +5,47 @@ import React from "react";
 //Importa o css específico do index. O Global está em App.css
 import "./index.css";
 
-//Importe este componente no App.js.
-function Rodape() {
-    return (
-        <footer className="fundo-azul"> {/*class é uma palavra reservada do js, então usamos className.*/}
-            <h1>Senai Informática 132</h1>
-        </footer>
-    );
+import logo from '../menu/image/logo02.jpeg'
+
+
+import {Col, Row, Container} from 'react-bootstrap';
+
+const Rodape =()=>{
+    return(
+        <div style={{backgroundColor : 'black'}}>
+            <container className='rodape' >
+                <div>
+                <Col sm={8}><img alt="Carongo" src={logo} style={{ width : '175px'}} /></Col>
+                </div>
+
+                <div>
+                    <h1>Integrantes</h1>
+                    <p>João Vitor</p>
+                    <p>Henrique Leandro</p>
+                    <p>Parra</p>
+                    <p>Daniel</p>
+                    <p>Kaique</p>
+                    <p>Murilo</p>
+                    <p>Renan</p>
+                </div>
+            </container>
+            <div className='text-center'>
+                <h2>Senai de Informatica - 2021</h2>
+            </div>
+   
+    
+    
+  
+    
+ 
+    
+     
+  
+ 
+
+       
+        </div>
+    )
 }
 
-//Deixa o WebComponent visível para outros WebComponents.
 export default Rodape;

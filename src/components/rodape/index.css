@@ -1,3 +1,14 @@
 .fundo-azul {
     background-color: aquamarine;
 }
+
+.rodape{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+}
+.text-center{
+    color: #FF6B01;
+}
+
+

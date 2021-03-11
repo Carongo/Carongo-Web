@@ -1,0 +1,22 @@
+
+
+.jumb{
+    width: 500px;
+    background-color: #FF6B01;
+    border-radius: 10px;
+    align-items: center;
+    
+    
+}
+.button{
+    background-color: black;
+   
+}
+
+
+
+.accont{
+    display: flex;
+    justify-content: space-around;
+   
+}
