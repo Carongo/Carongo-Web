@@ -312,6 +312,16 @@ const Turma = ({idTurma, nomeTurma, alunos, tipo, listar}) => {
         setIdTurmaAddLuno(id);
     };
 
+    const [showModalAlterarTurma, setShowModalAlterarTurma] = useState(false);
+    const [turma, setTurma] = useState({});
+    const handleCloseModalAlterarTurma = () => setShowModalAlterarTurma(false);
+    const [idTurmaAlterar, setIdTurmaAlterar] = useState("");
+    const handleShowModalAlterarTurma = (id) => {
+        setIdTurmaAlterar(id);
+        buscar(id)
+        setShowModalAlterarTurma(true);
+    };
+
     const deletarTurma = async (id) => {
         let resposta = window.confirm("Tem certeza de que deseja excluir essa turma? Todos os alunos também serão excluídos!")
         if(resposta) {
@@ -355,7 +365,6 @@ const Turma = ({idTurma, nomeTurma, alunos, tipo, listar}) => {
                 idTurma: idTurmaAddAluno
             },
             onSubmit : values => {
-                console.log(values)
                 fetch(`${url}/turma/adicionar-aluno`, {
                     method: "POST",
                     body: JSON.stringify(values),
@@ -482,6 +491,98 @@ const Turma = ({idTurma, nomeTurma, alunos, tipo, listar}) => {
         )
     }
 
+    const buscar = (id) => {
+        fetch(`${url}/turma/detalhes/${id}`, {
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${localStorage.getItem("token-carongo")}`
+            }
+        })
+        .then(resultado => resultado.json())
+        .then(dados => {
+            setTurma(dados.dados);
+        })
+    } 
+
+    const ModalAlterarTurma = () => {
+        const formikAlterarTurma = useFormik({
+            initialValues : {
+                Nome : turma.nome,
+                idTurma: idTurmaAlterar
+            },
+            onSubmit : values => {
+                fetch(`${url}/turma/alterar-turma`, {
+                    method: "PUT",
+                    body: JSON.stringify(values),
+                    headers: {
+                        "content-type": "application/json",
+                        "authorization": `Bearer ${localStorage.getItem("token-carongo")}`
+                    }
+                })
+                .then(resultado => resultado.json())
+                .then(dados => {
+                    console.log(dados)
+                    if(dados.sucesso){
+                        addToast(dados.mensagem, {
+                            appearance : 'success',
+                            autoDismiss : true
+                        });
+    
+                        formikAlterarTurma.resetForm();
+    
+                        listar();
+                    } 
+                    else {
+                        addToast(dados.mensagem, {
+                            appearance : 'error',
+                            autoDismiss : true
+                        })
+                    }
+                    setShowModalAlterarTurma(false);
+                })
+            },
+            validationSchema : Yup.object().shape({
+                Nome: Yup.string()         
+                  .min(2, 'O nome deve ter no minimo 3 caracteres')
+                  .max(41, 'O nome deve ter no máximo 40 caracteres')
+                  .required('Informe um nome')
+            })
+        })
+
+        return (
+            <Modal show={showModalAlterarTurma} onHide={handleCloseModalAlterarTurma}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Alterar turma</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Card>
+                        <Card.Body>
+                            <Form onSubmit={formikAlterarTurma.handleSubmit}>
+                                <Form.Group>
+                                    <Form.Label>Nome</Form.Label>
+                                    <Form.Control 
+                                        type="text" 
+                                        name="Nome" 
+                                        placeholder="Nome"  
+                                        value={formikAlterarTurma.values.Nome} 
+                                        onChange={formikAlterarTurma.handleChange}
+                                        required />
+                                        {formikAlterarTurma.errors.Nome && formikAlterarTurma.touched.Nome ? (<div className="error">{formikAlterarTurma.errors.Nome}</div>) : null }
+                                </Form.Group>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="light" onClick={handleCloseModalAlterarTurma}>
+                        Cancelar
+                    </Button>
+                    <Button type="submit" onClick={formikAlterarTurma.handleSubmit} variant="dark" disabled={formikAlterarTurma.isSubmitting}>{formikAlterarTurma.isSubmitting ? <Spinner animation="border" size="sm" /> : null } Salvar</Button>
+                </Modal.Footer>
+            </Modal>
+        )
+    }
+
     return (
         <div style={{margin: "50px 0"}}>
             <div style={{display: "flex", alignItems: "center"}}>
@@ -490,13 +591,14 @@ const Turma = ({idTurma, nomeTurma, alunos, tipo, listar}) => {
                     tipo === 1 ?
                     <div>
                         <ModalAluno/>
-                        <i className="fas fa-pencil-alt" style={{color: "#0069D9", cursor: "pointer"}}></i> <i className="fas fa-trash-alt" style={{color: "red", cursor: "pointer"}} onClick={() => deletarTurma(idTurma)}></i> <i className="fas fa-plus" style={{color: "green", cursor: "pointer"}} onClick={() => handleShowModalAluno(idTurma)}></i>
+                        <i className="fas fa-pencil-alt" style={{color: "#0069D9", cursor: "pointer"}} onClick={() => handleShowModalAlterarTurma(idTurma)}></i> <i className="fas fa-trash-alt" style={{color: "red", cursor: "pointer"}} onClick={() => deletarTurma(idTurma)}></i> <i className="fas fa-plus" style={{color: "green", cursor: "pointer"}} onClick={() => handleShowModalAluno(idTurma)}></i>
                     </div>
                     :
                     null
                 }
             </div>
             <Card>
+            <ModalAlterarTurma/>
                 <Card.Body>
                     {
                         alunos !== undefined && alunos.length > 0 ?
