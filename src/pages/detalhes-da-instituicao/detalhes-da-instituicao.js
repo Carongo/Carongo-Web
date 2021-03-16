@@ -85,6 +85,28 @@ const responsive = {
 
 const Aluno = ({idAluno, nomeAluno, email, dataNascimento, urlFoto, cpf, tipo, listar}) => {
     const {addToast} = useToasts();
+    const [showModalAlterarAluno, setShowModalAlterarAluno] = useState(false);
+    const [aluno, setAluno] = useState({});
+    const handleCloseModalAlterarAluno = () => setShowModalAlterarAluno(false);
+    const [idAlunoAlterar, setIdAlunoAlterar] = useState("");
+    const handleShowModalAlterarAluno = (id) => {
+        setIdAlunoAlterar(id);
+        buscar(id)
+        setShowModalAlterarAluno(true);
+    };
+
+    const buscar = (id) => {
+        fetch(`${url}/aluno/detalhes/${id}`, {
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${localStorage.getItem("token-carongo")}`
+            }
+        })
+        .then(resultado => resultado.json())
+        .then(dados => {
+            setAluno(dados.dados);
+        })
+    } 
 
     const deletarAluno = async (id) => {
         const response = await fetch(`${url}/aluno/deletar-aluno`, {
@@ -102,6 +124,157 @@ const Aluno = ({idAluno, nomeAluno, email, dataNascimento, urlFoto, cpf, tipo, l
         listar();
     }
 
+    const ModalAlterarAluno = () => {
+        const uploadImgAluno = (event) => {
+            event.preventDefault();
+    
+            let image = event.target.files[0];
+    
+            let nomeImg = criarGuid();
+    
+            storage.ref(nomeImg).put(image).then(async () => {
+                let a = await storage.ref(nomeImg).getDownloadURL();
+                formikAlterarAluno.setFieldValue("urlFoto", a);
+            });
+        }
+
+        const formikAlterarAluno = useFormik({
+            initialValues : {
+                Nome : aluno.nome,
+                Email : aluno.email,
+                DataNascimento: aluno.dataNascimento,
+                CPF: aluno.cpf,
+                urlFoto: aluno.urlFoto,
+                idAluno: idAlunoAlterar
+            },
+            onSubmit : values => {
+                fetch(`${url}/aluno/alterar-aluno`, {
+                    method: "PUT",
+                    body: JSON.stringify(values),
+                    headers: {
+                        "content-type": "application/json",
+                        "authorization": `Bearer ${localStorage.getItem("token-carongo")}`
+                    }
+                })
+                .then(resultado => resultado.json())
+                .then(dados => {
+                    console.log(dados)
+                    if(dados.sucesso){
+                        addToast(dados.mensagem, {
+                            appearance : 'success',
+                            autoDismiss : true
+                        });
+    
+                        formikAlterarAluno.resetForm();
+    
+                        listar();
+                    } 
+                    else {
+                        addToast(dados.mensagem, {
+                            appearance : 'error',
+                            autoDismiss : true
+                        })
+                    }
+                    setShowModalAlterarAluno(false);
+                })
+            },
+            validationSchema : Yup.object().shape({
+                Nome: Yup.string()         
+                  .min(2, 'O nome deve ter no minimo 3 caracteres')
+                  .max(41, 'O nome deve ter no máximo 40 caracteres')
+                  .required('Informe um nome'),
+                Email: Yup.string()
+                  .required('Informe um email'),
+                DataNascimento: Yup.string()
+                  .required('Informe a data de nascimento'),
+                CPF: Yup.string()
+                  .required('Informe o CPF'),
+            })
+        })
+
+        return (
+            <Modal show={showModalAlterarAluno} onHide={handleCloseModalAlterarAluno}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Alterar aluno</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Card>
+                        <Card.Body>
+                            {formikAlterarAluno.values.urlFoto &&<div style={{width: "150px", height: "150px", backgroundImage: `url(${formikAlterarAluno.values.urlFoto})`, margin: "auto", boxShadow: "inset 2px 2px 5px black, 2px 2px 2px black", backgroundSize: "cover", backgroundPosition: "50% 50%"}}></div>}
+                            <Form style={{margin: "20px", display: "flex", justifyContent: "center"}}>
+                                <FormFile>
+                                    <Form.Label htmlFor="Aluno"><p style={{color: "#0069D9", cursor: "pointer"}}><i className="far fa-image"></i>{ formikAlterarAluno.values.urlFoto === "" ? " Selecionar imagem": " Trocar imagem"}</p></Form.Label>
+                                    <Form.File
+                                        id="Aluno"
+                                        label="Imagem do aluno"
+                                        custom
+                                        accept="image/*"
+                                        style={{display: "none"}}
+                                        onChange={event => uploadImgAluno(event)}
+                                    />
+                                </FormFile>
+                            </Form>
+                            <Form onSubmit={formikAlterarAluno.handleSubmit}>
+                                <Form.Group>
+                                    <Form.Label>Nome</Form.Label>
+                                    <Form.Control 
+                                        type="text" 
+                                        name="Nome" 
+                                        placeholder="Nome"  
+                                        value={formikAlterarAluno.values.Nome} 
+                                        onChange={formikAlterarAluno.handleChange}
+                                        required />
+                                        {formikAlterarAluno.errors.Nome && formikAlterarAluno.touched.Nome ? (<div className="error">{formikAlterarAluno.errors.Nome}</div>) : null }
+                                </Form.Group>
+                                                            
+                                <Form.Group>
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control 
+                                        type="text"  
+                                        name="Email"
+                                        placeholder="Email" 
+                                        value={formikAlterarAluno.values.Email} 
+                                        onChange={formikAlterarAluno.handleChange}  
+                                        required />
+                                    {formikAlterarAluno.errors.Email && formikAlterarAluno.touched.Email ? (<div className="error">{formikAlterarAluno.errors.Email}</div>) : null }
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Data de Nascimento</Form.Label>
+                                    <Form.Control 
+                                        type="text"  
+                                        name="DataNascimento"
+                                        placeholder="Data de nascimento" 
+                                        value={formikAlterarAluno.values.DataNascimento} 
+                                        onChange={formikAlterarAluno.handleChange}  
+                                        required />
+                                    {formikAlterarAluno.errors.DataNascimento && formikAlterarAluno.touched.DataNascimento ? (<div className="error">{formikAlterarAluno.errors.DataNascimento}</div>) : null }
+                                </Form.Group>
+                                
+                                <Form.Group>
+                                    <Form.Label>CPF</Form.Label>
+                                    <Form.Control 
+                                        type="text"  
+                                        name="CPF"
+                                        placeholder="CPF" 
+                                        value={formikAlterarAluno.values.CPF} 
+                                        onChange={formikAlterarAluno.handleChange}  
+                                        required />
+                                    {formikAlterarAluno.errors.CPF && formikAlterarAluno.touched.CPF ? (<div className="error">{formikAlterarAluno.errors.CPF}</div>) : null }
+                                </Form.Group>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="light" onClick={handleCloseModalAlterarAluno}>
+                        Cancelar
+                    </Button>
+                    <Button type="submit" onClick={formikAlterarAluno.handleSubmit} variant="dark" disabled={formikAlterarAluno.isSubmitting}>{formikAlterarAluno.isSubmitting ? <Spinner animation="border" size="sm" /> : null } Salvar</Button>
+                </Modal.Footer>
+            </Modal>
+        )
+    }
+
     return (
         <Card style={{ width: '14rem', margin: "auto" }}>
             <Card.Img variant="top" src={urlFoto} />
@@ -111,7 +284,8 @@ const Aluno = ({idAluno, nomeAluno, email, dataNascimento, urlFoto, cpf, tipo, l
                     {
                         tipo === 1 ?
                         <div>
-                            <i className="fas fa-pencil-alt" style={{color: "#0069D9", cursor: "pointer"}}></i> <i className="fas fa-trash-alt" style={{color: "red", cursor: "pointer"}} onClick={() => deletarAluno(idAluno)}></i>
+                            <ModalAlterarAluno/>
+                            <i className="fas fa-pencil-alt" style={{color: "#0069D9", cursor: "pointer"}} onClick={() => handleShowModalAlterarAluno(idAluno)}></i> <i className="fas fa-trash-alt" style={{color: "red", cursor: "pointer"}} onClick={() => deletarAluno(idAluno)}></i>
                         </div>
                         :
                         null
@@ -126,7 +300,7 @@ const Aluno = ({idAluno, nomeAluno, email, dataNascimento, urlFoto, cpf, tipo, l
     )
 }
 
-const Turma = ({idTurma, nomeTurma, alunos, tipo, listar, criarGuid}) => {
+const Turma = ({idTurma, nomeTurma, alunos, tipo, listar}) => {
     const {addToast} = useToasts();
     const [showModalAluno, setShowModalAluno] = useState(false);
     const handleCloseModalAluno = () => setShowModalAluno(false);
@@ -188,9 +362,10 @@ const Turma = ({idTurma, nomeTurma, alunos, tipo, listar, criarGuid}) => {
                         "authorization": `Bearer ${localStorage.getItem("token-carongo")}`
                     }
                 })
-                .then(resultado => {
-                    if(resultado.sucesso){
-                        addToast(resultado.mensagem, {
+                .then(resultado => resultado.json())
+                .then(dados => {
+                    if(dados.sucesso){
+                        addToast(dados.mensagem, {
                             appearance : 'success',
                             autoDismiss : true
                         });
@@ -200,11 +375,12 @@ const Turma = ({idTurma, nomeTurma, alunos, tipo, listar, criarGuid}) => {
                         listar();
                     } 
                     else {
-                        addToast(resultado.mensagem, {
+                        addToast(dados.mensagem, {
                             appearance : 'error',
                             autoDismiss : true
                         })
                     }
+                    setShowModalAluno(false);
                 })
             },
             validationSchema : Yup.object().shape({
@@ -446,12 +622,6 @@ const DetalhesDaInstituicao = () => {
         }
     })
 
-    const criarGuid = () => {
-        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-        );
-    }
-
     return (
         <>
             <Container style={{width: "95vw"}}>
@@ -524,7 +694,7 @@ const DetalhesDaInstituicao = () => {
                     turmas.turmas !== undefined
                     ?
                     turmas.turmas.map((turma, index) => {
-                        return <Turma idTurma={turma.idTurma} nomeTurma={turma.nomeTurma} alunos={turma.alunos} tipo={turmas.tipo} listar={listar} criarGuid={criarGuid} key={index}/>
+                        return <Turma idTurma={turma.idTurma} nomeTurma={turma.nomeTurma} alunos={turma.alunos} tipo={turmas.tipo} listar={listar} key={index}/>
                     })
                     :
                     <div style={{width: "83vw", display: "flex", justifyContent: "center"}}>
@@ -536,6 +706,12 @@ const DetalhesDaInstituicao = () => {
             </Container>
         </>
     )
+}
+
+const criarGuid = () => {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
 }
 
 export default DetalhesDaInstituicao;
