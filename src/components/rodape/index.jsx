@@ -5,7 +5,7 @@ import React from "react";
 //Importa o css específico do index. O Global está em App.css
 import "./index.css";
 
-import logo from '../menu/image/logo02.jpeg'
+import logo from '../menu/image/logo.jpeg'
 
 
 import {Col, Row, Container} from 'react-bootstrap';

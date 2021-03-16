@@ -1,34 +1,62 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-
-
+import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import * as serviceWorker from './serviceWorker';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+
 import Login from './pages/login';
 import Cadastro from './pages/cadastro';
 import Home from './pages/home';
+import DetalhesDaInstituicao from "./pages/detalhes-da-instituicao/detalhes-da-instituicao";
+import { ToastProvider } from 'react-toast-notifications';
 
+const RotaPrivadaLogado = ({component : Component, ...rest}) => (
+  <Route
+    {...rest}
+    render= {
+      props => 
+      localStorage.getItem("token-carongo") !== null ?
+        <Component {...props}/> :
+        <Redirect to={{pathname: "/login", state: {from: props.location}}}/>
+    }
+  />
+);
+
+const RotaPrivadaNaoLogado = ({component : Component, ...rest}) => (
+  <Route
+    {...rest}
+    render= {
+      props => 
+      localStorage.getItem("token-carongo") === null ?
+        <Component {...props}/> :
+        <Redirect to={{pathname: "/minhas-instituicoes", state: {from: props.location}}}/>
+    }
+  />
+);
 
 const routing = (
   <Router>
     <Switch>
-      <Route  path="/" component={Login} />
-      <Route  path="/cadastro" component={Cadastro} />
+      <RotaPrivadaNaoLogado exact path="/" component={Home} />
+      <RotaPrivadaNaoLogado path="/login" component={Login} /> {/*http://localhost:5000/conta/entrar*/}
+      <RotaPrivadaNaoLogado path="/cadastro" component={Cadastro} /> {/*http://localhost:5000/conta/cadastrar-se*/}
+      <RotaPrivadaNaoLogado path="/esqueci-minha-senha" component={Cadastro} /> {/*http://localhost:5000/conta/solicitar-nova-senha*/}
+      <RotaPrivadaNaoLogado path="/esqueci-minha-senha/redefinir-senha/:jwt" component={Cadastro} /> {/*http://localhost:5000/conta/redefinir-senha*/}
 
-      
+      <RotaPrivadaLogado path="/minhas-instituicoes" component={Cadastro} /> {/*http://localhost:5000/instituicao/listar-minhas-instituicoes, http://localhost:5000/instituicao/criar-instituicao, http://localhost:5000/instituicao/entrar-na-instituicao*/}
+      <RotaPrivadaLogado path="/detalhes-da-instituicao/:idInstituicao" component={DetalhesDaInstituicao} /> {/*http://localhost:5000/instituicao/adicionar-turma, http://localhost:5000/instituicao/alterar-instituicao, http://localhost:5000/instituicao/deletar-instituicao, http://localhost:5000/turma/adicionar-aluno, http://localhost:5000/turma/alterar-turma, http://localhost:5000/aluno/alterar-aluno*/}
+      <RotaPrivadaLogado path="/pessoas-da-instituicao/:idInstituicao" component={Cadastro} /> {/*http://localhost:5000/instituicao/listar-pessoas-da-instituicao/F6F08E78-CCBC-4C97-9673-B03B3F592C67, http://localhost:5000/instituicao/adicionar-administrador, http://localhost:5000/instituicao/expulsar-colaborador*/}
+      <RotaPrivadaLogado path="/meu-perfil" component={Cadastro} /> {/*http://localhost:5000/conta/listar-meu-perfil, http://localhost:5000/conta/alterar-usuario, http://localhost:5000/conta/alterar-senha, http://localhost:5000/conta/deletar-conta*/}
     </Switch>
   </Router>
 )
 
 ReactDOM.render(
-  routing,
-document.getElementById('root')
+  <ToastProvider>
+    {routing}
+  </ToastProvider>,
+  document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();

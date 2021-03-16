@@ -24,8 +24,8 @@ const Menu=()=> {
                 <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-sm-2">
     <Form inline>
-      <Nav.Link href="/login" style={{color : 'white'}}>login</Nav.Link>
-      <Nav.Link href="/cadastro" style={{color : 'white'}}>Login</Nav.Link>  
+      <Nav.Link href="/login" style={{color : 'white'}}>Login</Nav.Link>
+      <Nav.Link href="/cadastro" style={{color : 'white'}}>Cadastro</Nav.Link>  
         
    </Form> 
      </Nav>

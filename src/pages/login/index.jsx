@@ -19,14 +19,14 @@ const Login =() =>{
         event.preventDefault();
         console.log(email + senha);
 
-        fetch('http://localhost:500/api/account/login',{
-            methot : 'POST',
+        fetch('http://localhost:5000/conta/entrar',{
+            method : 'POST',
             body : JSON.stringify({
                 email : email,
                 senha : senha
             }),
             headers : {
-                'context-type' : 'application/json'
+                'content-type' : 'application/json'
             }
         })
         .then(response => {
@@ -35,11 +35,11 @@ const Login =() =>{
            }
            alert('dados invalidos');
         })
-        .then(data => {
+        .then(dados => {
             //salva o token no localstorage
-            localStorage.setItem('token-carango', data.token);
+            localStorage.setItem('token-carongo', dados.dados);
             //decodifica o Data.token
-            let usuario = jwt_decode(data.token)
+            let usuario = jwt_decode(dados.token)
             console.log(usuario)
             //redireciona para a ..... apos o login
             history.push('/....')
