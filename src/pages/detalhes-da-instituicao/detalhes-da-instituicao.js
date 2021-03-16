@@ -9,6 +9,7 @@ import {useToasts} from "react-toast-notifications";
 import firebase from "firebase";
 import {useHistory} from "react-router-dom";
 import * as Yup from "yup";
+import "./index.css";
 import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
 
@@ -21,6 +22,7 @@ var firebaseConfig = {
     appId: "1:316864397132:web:ff1b376c1b87b421ead9e9",
     measurementId: "G-XPSC8L642V"
   };
+
 const app = firebase.initializeApp(firebaseConfig);
 const storage = app.storage();
 
@@ -524,6 +526,88 @@ const DetalhesDaInstituicao = () => {
     const [urlImagemFiltro, setUrlImagemFiltro] = useState("");
     const {addToast} = useToasts();
 
+    const [showModalCriarTurma, setShowModalCriarTurma] = useState(false);
+    const handleCloseModalCriarTurma = () => setShowModalCriarTurma(false);
+    const handleShowModalCriarTurma = () => setShowModalCriarTurma(true);
+
+    const ModalCriarTurma = () => {
+        const formikCriarTurma = useFormik({
+            initialValues : {
+                Nome : '',
+                idInstituicao: idInstituicao
+            },
+            onSubmit : values => {
+                fetch(`${url}/instituicao/adicionar-turma`, {
+                    method: "PUT",
+                    body: JSON.stringify(values),
+                    headers: {
+                        "content-type": "application/json",
+                        "authorization": `Bearer ${localStorage.getItem("token-carongo")}`
+                    }
+                })
+                .then(resultado => resultado.json())
+                .then(dados => {
+                    if(dados.sucesso){
+                        addToast(dados.mensagem, {
+                            appearance : 'success',
+                            autoDismiss : true
+                        });
+    
+                        formikCriarTurma.resetForm();
+    
+                        listar();
+                    } 
+                    else {
+                        addToast(dados.mensagem, {
+                            appearance : 'error',
+                            autoDismiss : true
+                        })
+                    }
+                    setShowModalCriarTurma(false);
+                })
+            },
+            validationSchema : Yup.object().shape({
+                Nome: Yup.string()         
+                  .min(2, 'O nome deve ter no minimo 3 caracteres')
+                  .max(41, 'O nome deve ter no máximo 30 caracteres')
+                  .required('Informe um nome')
+            })
+        })
+
+        return (
+            <Modal show={showModalCriarTurma} onHide={handleCloseModalCriarTurma}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Adicionar Turma</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Card>
+                        <Card.Body>
+                            <Form onSubmit={formikCriarTurma.handleSubmit}>
+                                <Form.Group>
+                                    <Form.Label>Nome</Form.Label>
+                                    <Form.Control 
+                                        type="text" 
+                                        name="Nome" 
+                                        placeholder="Nome"  
+                                        value={formikCriarTurma.values.Nome} 
+                                        onChange={formikCriarTurma.handleChange}
+                                        required />
+                                        {formikCriarTurma.errors.Nome && formikCriarTurma.touched.Nome ? (<div className="error">{formikCriarTurma.errors.Nome}</div>) : null }
+                                </Form.Group>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="light" onClick={handleCloseModalCriarTurma}>
+                        Cancelar
+                    </Button>
+                    <Button type="submit" onClick={formikCriarTurma.handleSubmit} variant="dark" disabled={formikCriarTurma.isSubmitting}>{formikCriarTurma.isSubmitting ? <Spinner animation="border" size="sm" /> : null } Salvar</Button>
+                </Modal.Footer>
+            </Modal>
+        )
+    }
+
     useEffect(() => {
         listar();
     }, []);
@@ -569,6 +653,30 @@ const DetalhesDaInstituicao = () => {
         if(resposta) {
             const response = await fetch(`${url}/instituicao/sair-da-instituicao`, {
                 method: "PUT",
+                body: JSON.stringify({
+                    idInstituicao: idInstituicao
+                }),
+                headers: {
+                    "content-type": "application/json",
+                    "authorization": `Bearer ${localStorage.getItem("token-carongo")}`
+                }
+            });
+            const data = response.json();
+            if(data.sucesso) {
+                addToast(data.mensagem, {appearance: "success", autoDismiss: true});
+                history.push("/minhas-instituicoes");
+            }
+            else{
+                addToast(data.mensagem, {appearance: "error", autoDismiss: true});
+            }
+        }  
+    }
+
+    const deletarInstituicao = async () => {
+        let resposta = window.confirm("Tem certeza de que deseja deletar a instituição? Tudo que ela contempla será deletado junto com ela!");
+        if(resposta) {
+            const response = await fetch(`${url}/instituicao/deletar-instituicao`, {
+                method: "DELETE",
                 body: JSON.stringify({
                     idInstituicao: idInstituicao
                 }),
@@ -636,7 +744,8 @@ const DetalhesDaInstituicao = () => {
                             turmas.tipo === 1 ?
                             <>
                                 <Dropdown.Header style={{color: "black"}}><i className="fas fa-cog"></i> Configurações da instituição</Dropdown.Header>
-                                <Dropdown.Item>Adicionar turma</Dropdown.Item>
+                                <ModalCriarTurma/>
+                                <Dropdown.Item onClick={handleShowModalCriarTurma}>Adicionar turma</Dropdown.Item>
                                 <Dropdown.Item>Editar instituição</Dropdown.Item>
                                 <hr></hr>
                             </>
@@ -647,7 +756,7 @@ const DetalhesDaInstituicao = () => {
                         <Dropdown.Item style={{color: "red"}} onClick={() => sairDaInstituicao()}>Sair da instituição</Dropdown.Item>
                         {
                             turmas.tipo === 1 ?
-                            <Dropdown.Item style={{color: "red"}}>Deletar instituição</Dropdown.Item>
+                            <Dropdown.Item style={{color: "red"}} onClick={() => deletarInstituicao()}>Deletar instituição</Dropdown.Item>
                             :
                             null
                         }
