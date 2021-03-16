@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import{Navbar, Nav, NavDropdown, Form, Button, FormControl, Jumbotron, Container} from 'react-bootstrap';
-import './index.css';
+import{Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import logo from './image/logo.jpeg'
 import jwt_decode from "jwt-decode";
 import {useHistory} from 'react-router-dom';
+import './index.css'
 
 
 const Menu=()=> {
@@ -18,45 +18,77 @@ const Menu=()=> {
 
     const renderMenu = () =>{
         const token = localStorage.getItem('token-carango');
-
+        //se não estiver logado
         if(token === null){
             return(
-                <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-sm-2">
-    <Form inline>
-      <Nav.Link href="/login" style={{color : 'white'}}>login</Nav.Link>
-      <Nav.Link href="/cadastro" style={{color : 'white'}}>Login</Nav.Link>  
-        
-   </Form> 
-     </Nav>
-  </Navbar.Collapse>
+                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                  <a href="/"><img  alt="Carongo" src={logo} style={{ width : '175px'}} /></a>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                  <Nav className="mr-auto">
+                    <Nav.Link href="/pages/login">Login</Nav.Link>
+                    <Nav.Link href="/pages/cadastro">Cadastre-se</Nav.Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
 
             );
-            //mudança...
+            //mudança... // se estiver logado e for admin
         }else if(jwt_decode(token).role === 'admin'){
             return(
-         <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-sm-2">
-              <Form inline>
-                  <Nav.Link href="/login" style={{color : 'white'}}>Home</Nav.Link>
-                  <Nav.Link href="/cadastro" style={{color : 'white'}}>Login</Nav.Link>
-                  <Nav.Link href="/sair" onClick={event => Sair(event)} style={{color : 'white'}}>sair</Nav.Link>           
-               </Form> 
-         </Nav>
-         </Navbar.Collapse>
+                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar.Brand href="/pages/home">Carongo</Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                  <Nav className="mr-auto">
+                    <Nav.Link href="/pages/login">Login</Nav.Link>
+                    <Nav.Link href="/pages/cadastro">Cadastre-se</Nav.Link>
+                    <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+                      <NavDropdown.Item href="/sair">sair</NavDropdown.Item>
+                      <NavDropdown.Item href="perfil">Perfil</NavDropdown.Item>
+                      <NavDropdown.Item href="turmas">Turmas</NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                    </NavDropdown>
+                  </Nav>
+                  <Nav>
+                    <Nav.Link href="#deets">More deets</Nav.Link>
+                    <Nav.Link eventKey={2} href="#memes">
+                      Dank memes
+                    </Nav.Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
                 
             )
         }else {
+            //se estiver logado e não for nada
             return(
-                <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-sm-2">
-                <Form inline>
-                  <Nav.Link href="/login" style={{color : 'white'}}>Home</Nav.Link>
-                  <Nav.Link href="/cadastro" style={{color : 'white'}}>Login</Nav.Link>  
-                    
-               </Form> 
-                 </Nav>
-              </Navbar.Collapse>
+              <div>
+  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar.Brand href="/pages/home">Carongo</Navbar.Brand>
+    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+    <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+        <Nav.Link href="/pages/login">Login</Nav.Link>
+        <Nav.Link href="/pages/cadastro">Cadastre-se</Nav.Link>
+        <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+        </NavDropdown>
+    </Nav>
+    <Nav>
+      <Nav.Link href="#deets">More deets</Nav.Link>
+      <Nav.Link eventKey={2} href="#memes">
+        Dank memes
+      </Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+              </div>
                
             )
 
@@ -66,20 +98,9 @@ const Menu=()=> {
     }
         return (
          <div>
-        <Navbar style={{backgroundColor : 'black'}}>
-  <Navbar.Brand href="#"></Navbar.Brand>
-  <img alt="Carongo" src={logo} style={{ width : '150px', alignItems : 'center' }}/>
-
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-sm-2">
-    <Form inline>
+ 
     {renderMenu()}
-   </Form> 
-     </Nav>
-  </Navbar.Collapse>
-
-        </Navbar>
+  
 
         </div>
         )

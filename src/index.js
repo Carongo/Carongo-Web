@@ -10,13 +10,22 @@ import * as serviceWorker from './serviceWorker';
 import Login from './pages/login';
 import Cadastro from './pages/cadastro';
 import Home from './pages/home';
+import EsqueciaSenha from './pages/esqueciasenha';
+import Perfil from './pages/perfil';
+
 
 
 const routing = (
   <Router>
     <Switch>
-      <Route  path="/" component={Login} />
-      <Route  path="/cadastro" component={Cadastro} />
+      <Route  path="/pages/login" component={Login} />
+      <Route  path="/pages/cadastro" component={Cadastro} />
+      <Route  path="/pages/esqueciasenha" component={EsqueciaSenha} />
+      <Route  path="/pages/perfil" component={Perfil} />
+
+     <Route  path="/" component={Home} />
+
+
 
       
     </Switch>
