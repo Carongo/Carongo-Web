@@ -44,15 +44,15 @@ const routing = (
   <Router>
     <Switch>
       <RotaPrivadaNaoLogado exact path="/" component={Home} />
-      <RotaPrivadaNaoLogado path="/login" component={Login} /> {/*http://localhost:5000/conta/entrar*/}
-      <RotaPrivadaNaoLogado path="/cadastro" component={Cadastro} /> {/*http://localhost:5000/conta/cadastrar-se*/}
-      <RotaPrivadaNaoLogado path="/esqueci-minha-senha" component={Cadastro} /> {/*http://localhost:5000/conta/solicitar-nova-senha*/}
+      <RotaPrivadaNaoLogado path="/login" component={Login} /> 
+      <RotaPrivadaNaoLogado path="/cadastro" component={Cadastro} />
+      <RotaPrivadaNaoLogado path="/esqueci-minha-senha" component={EsqueciaSenha} /> {/*http://localhost:5000/conta/solicitar-nova-senha*/}
       <RotaPrivadaNaoLogado path="/esqueci-minha-senha/redefinir-senha/:jwt" component={Cadastro} /> {/*http://localhost:5000/conta/redefinir-senha*/}
 
       <RotaPrivadaLogado path="/minhas-instituicoes" component={Cadastro} /> {/*http://localhost:5000/instituicao/listar-minhas-instituicoes, http://localhost:5000/instituicao/criar-instituicao, http://localhost:5000/instituicao/entrar-na-instituicao*/}
       <RotaPrivadaLogado path="/detalhes-da-instituicao/:idInstituicao" component={DetalhesDaInstituicao} /> {/*http://localhost:5000/instituicao/alterar-instituicao*/}
       <RotaPrivadaLogado path="/pessoas-da-instituicao/:idInstituicao" component={PessoasDaInstituicao} /> {/*http://localhost:5000/instituicao/listar-pessoas-da-instituicao/F6F08E78-CCBC-4C97-9673-B03B3F592C67, http://localhost:5000/instituicao/adicionar-administrador, http://localhost:5000/instituicao/expulsar-colaborador*/}
-      <RotaPrivadaLogado path="/meu-perfil" component={Cadastro} /> {/*http://localhost:5000/conta/listar-meu-perfil, http://localhost:5000/conta/alterar-usuario, http://localhost:5000/conta/alterar-senha, http://localhost:5000/conta/deletar-conta*/}
+      <RotaPrivadaLogado path="/meu-perfil" component={Perfil} /> {/*http://localhost:5000/conta/listar-meu-perfil, http://localhost:5000/conta/alterar-usuario, http://localhost:5000/conta/alterar-senha, http://localhost:5000/conta/deletar-conta*/}
     </Switch>
   </Router>
 )
