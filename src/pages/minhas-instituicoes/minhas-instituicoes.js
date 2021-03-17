@@ -85,7 +85,7 @@ const responsive = {
     }
 }
 
-const Instituicao = ({idInstituicao, nomeInstituicao, descricao, codigo, listar}) => {
+const Instituicao = ({idInstituicao, nomeInstituicao, descricao, listar}) => {
     const {addToast} = useToasts();
     const [showModalAlterarInstituicao, setShowModalAlterarInstituicao] = useState(false);
     const [intituicao, setInstituicao] = useState({});
@@ -128,7 +128,6 @@ const Instituicao = ({idInstituicao, nomeInstituicao, descricao, codigo, listar}
             initialValues : {
                 Nome : instituicao.nome,
                 Descricao : instituicao.descricao,
-                Codigo: instituicao.codigo,
                 idInstituicao: idInstituicaoAlterar
             },
             onSubmit : values => {
@@ -169,9 +168,8 @@ const Instituicao = ({idInstituicao, nomeInstituicao, descricao, codigo, listar}
                   .required('Informe um nome'),
                 Descricao: Yup.string()
                   .min(3, 'A descricao deve ter no minimo 3 caracteres')
-                  .max(512, 'A descricao deve ter no máximo 512 caracteres')                  .required('Informe um email'),
-                Codigo: Yup.string()
-                  .required('Informe o codigo da instituicao'),
+                  .max(512, 'A descricao deve ter no máximo 512 caracteres')                  
+				  .required('Informe uma descricao'),
             })
         })
 
@@ -221,18 +219,6 @@ const Instituicao = ({idInstituicao, nomeInstituicao, descricao, codigo, listar}
                                         required />
                                     {formikAlterarInstituicao.errors.Descricao && formikAlterarInstituicao.touched.Descricao ? (<div className="error">{formikAlterarInstituicao.errors.Descricao}</div>) : null }
                                 </Form.Group>
-                                <Form.Group>
-                                    <Form.Label>Codigo</Form.Label>
-                                    <Form.Control 
-                                        type="text"  
-                                        name="Codigo"
-                                        placeholder="Codigo" 
-                                        value={formikAlterarInstituicao.values.Codigo} 
-                                        onChange={formikAlterarInstituicao.handleChange}  
-                                        required />
-                                    {formikAlterarInstituicao.errors.Codigo && formikAlterarInstituicao.touched.Codigo ? (<div className="error">{formikAlterarInstituicao.errors.Codigo}</div>) : null }
-                                </Form.Group>
-                              
                             </Form>
                         </Card.Body>
                     </Card>
@@ -246,6 +232,102 @@ const Instituicao = ({idInstituicao, nomeInstituicao, descricao, codigo, listar}
             </Modal>
         )
     }
+	
+	const ModalCriarInstituicao = () => {
+    const formikCriarInstituicao = useFormik({
+        initialValues : {
+            Nome : '',
+            Descricao: '',
+            Codigo:'',
+            idTurma: idTurma,
+            idUsuarioInstituicao: idUsuarioInstituicao
+        },
+        onSubmit : values => {
+            fetch(`${url}/instituicao/adicionar-instituicao`, {
+                method: "POST",
+                body: JSON.stringify(values),
+                headers: {
+                    "content-type": "application/json",
+                    "authorization": `Bearer ${localStorage.getItem("token-carongo")}`
+                }
+            })
+            .then(resultado => resultado.json())
+            .then(dados => {
+                if(dados.sucesso){
+                    addToast(dados.mensagem, {
+                        appearance : 'success',
+                        autoDismiss : true
+                    });
+
+                    formikCriarTurma.resetForm();
+
+                    listar();
+                } 
+                else {
+                    addToast(dados.mensagem, {
+                        appearance : 'error',
+                        autoDismiss : true
+                    })
+                }
+                setShowModalCriarInstituicao(false);
+            })
+        },
+        validationSchema : Yup.object().shape({
+            Nome: Yup.string()         
+              .min(2, 'O nome deve ter no minimo 3 caracteres')
+              .max(41, 'O nome deve ter no máximo 30 caracteres')
+              .required('Informe um nome'),
+            Descricao: Yup.string()         
+              .required('Informe um nome'),
+        })
+    })
+
+    return (
+        <Modal show={showModalCriarInstituicao} onHide={handleCloseModalCriarInstituicao}>
+            <Modal.Header closeButton>
+                <Modal.Title>Adicionar Instituicao</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Card>
+                    <Card.Body>
+                        <Form onSubmit={formikCriarInstituicao.handleSubmit}>
+                            <Form.Group>
+                                <Form.Label>Nome</Form.Label>
+                                <Form.Control 
+                                    type="text" 
+                                    name="Nome" 
+                                    placeholder="Nome"  
+                                    value={formikCriarInstituicao.values.Nome} 
+                                    onChange={formikCriarInstituicao.handleChange}
+                                    required />
+                                    {formikCriarInstituicao.errors.Nome && formikCriarInstituicao.touched.Nome ? (<div className="error">{formikCriarInstituicao.errors.Nome}</div>) : null }
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Descricao</Form.Label>
+                                <Form.Control 
+                                    type="text" 
+                                    name="Descricao" 
+                                    placeholder="Descricao"  
+                                    value={formikCriarInstituicao.values.Descricao} 
+                                    onChange={formikCriarInstituicao.handleChange}
+                                    required />
+                                    {formikCriarInstituicao.errors.Descricao && formikCriarInstituicao.touched.Descricao ? (<div className="error">{formikCriarInstituicao.errors.Descricao}</div>) : null }
+                            </Form.Group>
+                        </Form>
+                    </Card.Body>
+                </Card>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="light" onClick={handleCloseModalCriarInstituicao}>
+                    Cancelar
+                </Button>
+                <Button type="submit" onClick={formikCriarInstituicao.handleSubmit} variant="dark" disabled={formikCriarInstituicao.isSubmitting}>{formikCriarInstituicao.isSubmitting ? <Spinner animation="border" size="sm" /> : null } Salvar</Button>
+            </Modal.Footer>
+        </Modal>
+    )
+}
+	
+	
 
 const MinhasInstituicoes = () => {
     const {idInstituicao} = useParams();
@@ -316,7 +398,7 @@ const MinhasInstituicoes = () => {
                     instituicao.instituicao !== undefined
                     ?
                     instituicao.instituicao.map((instituicao, index) => {
-                        return <Instituicao idInstituicao={instituicao.idInstituicao} nomeInstituicao={instituicao.nomeInstituicao} descricao={instituicao.descricao} codigo={instituicao.codigo} listar={listar} key={index}/>
+                        return <Instituicao idInstituicao={instituicao.idInstituicao} nomeInstituicao={instituicao.nomeInstituicao} descricao={instituicao.descricao} listar={listar} key={index}/>
                     })
                     :
                     <div style={{width: "83vw", display: "flex", justifyContent: "center"}}>
