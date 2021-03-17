@@ -22,7 +22,7 @@ const RotaPrivadaLogado = ({component : Component, ...rest}) => (
       props => 
       localStorage.getItem("token-carongo") !== null ?
         <Component {...props}/> :
-        <Redirect to={{pathname: "/login", state: {from: props.location}}}/>
+        <Redirect to={{pathname: "/minhas-instituicoes", state: {from: props.location}}}/>
     }
   />
 );
@@ -35,7 +35,7 @@ const RotaPrivadaNaoLogado = ({component : Component, ...rest}) => (
       props => 
       localStorage.getItem("token-carongo") === null ?
         <Component {...props}/> :
-        <Redirect to={{pathname: "/minhas-instituicoes", state: {from: props.location}}}/>
+        <Redirect to={{pathname: "/login", state: {from: props.location}}}/>
     }
   />
 );
