@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6bca07f2785af54c52a392e04071e568",
+    "revision": "67e0e6d91349ca904b003a7511af6e2d",
     "url": "/Carongo-Web/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Carongo-Web/static/css/2.5535d0e7.chunk.css"
   },
   {
-    "revision": "c267098c9084d92b675c",
+    "revision": "fce985f189c557454551",
     "url": "/Carongo-Web/static/css/main.e20f16fe.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Carongo-Web/static/js/2.fa60f9e6.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c267098c9084d92b675c",
-    "url": "/Carongo-Web/static/js/main.89e68dc6.chunk.js"
+    "revision": "fce985f189c557454551",
+    "url": "/Carongo-Web/static/js/main.96885a2c.chunk.js"
   },
   {
     "revision": "44ff8833f8fca39ef095",
