@@ -3,10 +3,13 @@ import './index.css';
 import { useHistory } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 
+import imglog from './image/imglog.png'
 
-import{ Jumbotron, Container, Form, Button, } from 'react-bootstrap';
+
+
 import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
+import { Form, Button, InputGroup, FormControl, Container, Jumbotron } from 'react-bootstrap';
 
 
 
@@ -54,38 +57,49 @@ const Login =() =>{
             
     <div>
         <Menu />
-    <Container className="container">
+        <Container className="container">
+       
+      <Jumbotron  className='jumb'>
+        <div className='text-center' >
+        <h1 className="text-center">
+          Login
+        </h1>
+       
+        </div>
+      <Form >
 
-      <Jumbotron className='jumb'>
- <Form >
-    <Form.Group controlId="formBasicEmail">
-    <Form.Label>Email</Form.Label>
-    <Form.Control type="email" value={email} onChange={event=> setEmail(event.target.value)} placeholder="Digite seu email" />
+      <Form.Group controlId="formBasicEmail">
+      <Form.Label>Email</Form.Label>
+      <Form.Control value={email} onChange={event=> setEmail(event.target.value)} type="email" placeholder="Digite seu email" />
+      </Form.Group>
 
-    </Form.Group>
+      <Form.Group controlId="formBasicPassword">
+      <Form.Label>Senha</Form.Label>
+      <Form.Control value={senha} onChange={event=> setSenha(event.target.value)} type="password" placeholder="Digite sua senha" />
+      </Form.Group>
 
-    <Form.Group controlId="formBasicPassword">
-    <Form.Label>Senha</Form.Label>
-    <Form.Control type="password" value={senha} onChange={event=> setSenha(event.target.value)} placeholder="Digite sua senha" />
-    </Form.Group>
-        <container class='accont'>
-            <div>
-            <a href="#esqueciminhasenha">Esqueci minha senha</a>
-            </div>
+      <div className="options" >
+          <a href="/pages/cadastro">Cadastre-se</a>
+          <a href="/pages/esqueciasenha">Esqueci minha senha</a>
+      </div>
 
-            <div>
-            <a href="/cadastro">Criar conta</a>
-            </div>
+      <Button style={{marginTop : '18px'}} onClick={event => logar(event)}  className='button' variant="dark" type="submit">
+      Entrar
+      </Button>
+      </Form>
 
-        </container>
+      </Jumbotron>
 
-    <Button style={{marginTop : '18px'}} onClick={event => logar(event)}  className='button' variant="dark" type="submit">
-         Login
-    </Button>
-</Form>
 
-     </Jumbotron>
-        </Container>
+
+      </Container>
+     
+       
+
+        
+        
+
+       
      <Rodape />
 
     </div>

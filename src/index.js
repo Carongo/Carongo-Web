@@ -10,6 +10,9 @@ import Cadastro from './pages/cadastro';
 import Home from './pages/home';
 import DetalhesDaInstituicao from "./pages/detalhes-da-instituicao/detalhes-da-instituicao";
 import PessoasDaInstituicao from "./pages/pessoas-da-instituicao/pessoas-da-instituicao";
+import EsqueciaSenha from './pages/esqueciasenha';
+import Perfil from './pages/perfil';
+
 import { ToastProvider } from 'react-toast-notifications';
 
 const RotaPrivadaLogado = ({component : Component, ...rest}) => (
@@ -23,6 +26,7 @@ const RotaPrivadaLogado = ({component : Component, ...rest}) => (
     }
   />
 );
+
 
 const RotaPrivadaNaoLogado = ({component : Component, ...rest}) => (
   <Route

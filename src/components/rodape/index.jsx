@@ -12,21 +12,10 @@ import {Col, Row, Container} from 'react-bootstrap';
 
 const Rodape =()=>{
     return(
-        <div style={{backgroundColor : 'black'}}>
+        <div style={{backgroundColor : '#343A40'}}>
             <container className='rodape' >
                 <div>
-                <Col sm={8}><img alt="Carongo" src={logo} style={{ width : '175px'}} /></Col>
-                </div>
-
-                <div>
-                    <h1>Integrantes</h1>
-                    <p>João Vitor</p>
-                    <p>Henrique Leandro</p>
-                    <p>Parra</p>
-                    <p>Daniel</p>
-                    <p>Kaique</p>
-                    <p>Murilo</p>
-                    <p>Renan</p>
+               <a href="/"> <Col sm={8}><img alt="Carongo" src={logo} style={{ width : '175px'}} /></Col></a>
                 </div>
             </container>
             <div className='text-center'>
