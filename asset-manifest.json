@@ -1,27 +1,31 @@
 {
   "files": {
-    "main.css": "/Carongo-Web/static/css/main.d1ca8185.chunk.css",
-    "main.js": "/Carongo-Web/static/js/main.7d477445.chunk.js",
-    "main.js.map": "/Carongo-Web/static/js/main.7d477445.chunk.js.map",
-    "runtime-main.js": "/Carongo-Web/static/js/runtime-main.fce40b46.js",
-    "runtime-main.js.map": "/Carongo-Web/static/js/runtime-main.fce40b46.js.map",
-    "static/css/2.9233ae65.chunk.css": "/Carongo-Web/static/css/2.9233ae65.chunk.css",
-    "static/js/2.cc97c6c0.chunk.js": "/Carongo-Web/static/js/2.cc97c6c0.chunk.js",
-    "static/js/2.cc97c6c0.chunk.js.map": "/Carongo-Web/static/js/2.cc97c6c0.chunk.js.map",
-    "index.html": "/Carongo-Web/index.html",
-    "precache-manifest.3397b1e400748f8b2a76fac814ee6fa7.js": "/Carongo-Web/precache-manifest.3397b1e400748f8b2a76fac814ee6fa7.js",
-    "service-worker.js": "/Carongo-Web/service-worker.js",
-    "static/css/2.9233ae65.chunk.css.map": "/Carongo-Web/static/css/2.9233ae65.chunk.css.map",
-    "static/css/main.d1ca8185.chunk.css.map": "/Carongo-Web/static/css/main.d1ca8185.chunk.css.map",
-    "static/js/2.cc97c6c0.chunk.js.LICENSE.txt": "/Carongo-Web/static/js/2.cc97c6c0.chunk.js.LICENSE.txt",
-    "static/media/logo.jpeg": "/Carongo-Web/static/media/logo.aaae45df.jpeg",
-    "static/media/logo02.jpeg": "/Carongo-Web/static/media/logo02.301f87e3.jpeg"
+    "main.css": "/carongo-web/static/css/main.e20f16fe.chunk.css",
+    "main.js": "/carongo-web/static/js/main.5c41d3e1.chunk.js",
+    "main.js.map": "/carongo-web/static/js/main.5c41d3e1.chunk.js.map",
+    "runtime-main.js": "/carongo-web/static/js/runtime-main.4683902c.js",
+    "runtime-main.js.map": "/carongo-web/static/js/runtime-main.4683902c.js.map",
+    "static/css/2.4adad70d.chunk.css": "/carongo-web/static/css/2.4adad70d.chunk.css",
+    "static/js/2.5a20f95a.chunk.js": "/carongo-web/static/js/2.5a20f95a.chunk.js",
+    "static/js/2.5a20f95a.chunk.js.map": "/carongo-web/static/js/2.5a20f95a.chunk.js.map",
+    "index.html": "/carongo-web/index.html",
+    "precache-manifest.c9d28e586774b79cc71544fc4693ea74.js": "/carongo-web/precache-manifest.c9d28e586774b79cc71544fc4693ea74.js",
+    "service-worker.js": "/carongo-web/service-worker.js",
+    "static/css/2.4adad70d.chunk.css.map": "/carongo-web/static/css/2.4adad70d.chunk.css.map",
+    "static/css/main.e20f16fe.chunk.css.map": "/carongo-web/static/css/main.e20f16fe.chunk.css.map",
+    "static/js/2.5a20f95a.chunk.js.LICENSE.txt": "/carongo-web/static/js/2.5a20f95a.chunk.js.LICENSE.txt",
+    "static/media/Carrousel1.png": "/carongo-web/static/media/Carrousel1.e2b1d1f2.png",
+    "static/media/Carrousel2.png": "/carongo-web/static/media/Carrousel2.f18072f1.png",
+    "static/media/eurekinha.png": "/carongo-web/static/media/eurekinha.bd8d39ef.png",
+    "static/media/imglog.png": "/carongo-web/static/media/imglog.bb9ee605.png",
+    "static/media/logo.jpeg": "/carongo-web/static/media/logo.21fb3849.jpeg",
+    "static/media/styles.css": "/carongo-web/static/media/revicons.2feb69cc.eot"
   },
   "entrypoints": [
-    "static/js/runtime-main.fce40b46.js",
-    "static/css/2.9233ae65.chunk.css",
-    "static/js/2.cc97c6c0.chunk.js",
-    "static/css/main.d1ca8185.chunk.css",
-    "static/js/main.7d477445.chunk.js"
+    "static/js/runtime-main.4683902c.js",
+    "static/css/2.4adad70d.chunk.css",
+    "static/js/2.5a20f95a.chunk.js",
+    "static/css/main.e20f16fe.chunk.css",
+    "static/js/main.5c41d3e1.chunk.js"
   ]
 }
