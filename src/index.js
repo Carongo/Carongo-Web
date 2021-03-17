@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 
 import Login from './pages/login';
 import Cadastro from './pages/cadastro';
-import Home from './pages/home';
+import Home from './pages/home/index';
 import DetalhesDaInstituicao from "./pages/detalhes-da-instituicao/detalhes-da-instituicao";
 import PessoasDaInstituicao from "./pages/pessoas-da-instituicao/pessoas-da-instituicao";
 import EsqueciaSenha from './pages/esqueciasenha';
