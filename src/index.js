@@ -41,13 +41,13 @@ const RotaPrivadaNaoLogado = ({component : Component, ...rest}) => (
 );
 
 const routing = (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <Switch>
       <RotaPrivadaNaoLogado exact path="/" component={Home} />
       <RotaPrivadaNaoLogado path="/login" component={Login} /> 
       <RotaPrivadaNaoLogado path="/cadastro" component={Cadastro} />
       <RotaPrivadaNaoLogado path="/esqueci-minha-senha" component={EsqueciaSenha} /> {/*http://localhost:5000/conta/solicitar-nova-senha*/}
-      <RotaPrivadaNaoLogado path="/esqueci-minha-senha/redefinir-senha/:jwt" component={Cadastro} /> {/*http://localhost:5000/conta/redefinir-senha*/}
+      <RotaPrivadaNaoLogado path="/esqueci-minha-senha/redefinir-senha/token=:jwt" component={Cadastro} /> {/*http://localhost:5000/conta/redefinir-senha*/}
 
       <RotaPrivadaLogado path="/minhas-instituicoes" component={Cadastro} /> {/*http://localhost:5000/instituicao/listar-minhas-instituicoes, http://localhost:5000/instituicao/criar-instituicao, http://localhost:5000/instituicao/entrar-na-instituicao*/}
       <RotaPrivadaLogado path="/detalhes-da-instituicao/:idInstituicao" component={DetalhesDaInstituicao} /> {/*http://localhost:5000/instituicao/alterar-instituicao*/}

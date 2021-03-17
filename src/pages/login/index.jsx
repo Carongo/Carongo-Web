@@ -41,11 +41,7 @@ const Login =() =>{
         .then(dados => {
             //salva o token no localstorage
             localStorage.setItem('token-carongo', dados.dados);
-            //decodifica o Data.token
-            let usuario = jwt_decode(dados.token)
-            console.log(usuario)
-            //redireciona para a ..... apos o login
-            history.push('/....')
+            history.push('/minhas-instituicoes')
             
         })
         .catch(err => console.error(err));

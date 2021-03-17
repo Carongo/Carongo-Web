@@ -14,32 +14,22 @@ const EsqueciaSenha =()=>{
     event.preventDefault();
     console.log(email);
 
-    fetch('http://localhost:500/conta/redefinir-senha',{
-            methot : 'POST',
+    fetch('http://localhost:5000/conta/solicitar-nova-senha', {
+            method : 'POST',
             body : JSON.stringify({
                 email : email,
             }),
             headers : {
-                'context-type' : 'application/json'
+                'content-type' : 'application/json'
             }
-        })
-        .then(response => {
-           if(response.ok){
-               return response.json();
-           }
-           alert('dados invalidos');
-        })
-        .then(data => {
-            //salva o token no localstorage
-            localStorage.setItem('token-carango', data.token);
-            //decodifica o Data.token
-            let usuario = jwt_decode(data.token)
-            console.log(usuario)
-            //redireciona para a ..... apos o login
-            history.push('....')
-            
-        })
-        .catch(err => console.error(err));
+    })
+    .then(response => response.json())
+    .then(data => {
+        let usuario = jwt_decode(data.token)
+        console.log(usuario)
+        history.push('....')
+    })
+    .catch(err => console.error(err));
 
 
     

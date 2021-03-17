@@ -26,15 +26,15 @@ const Cadastro =()=>{
     event.preventDefault();
     console.log(nome + email + senha);
 
-    fetch('http://localhost:500/conta/cadastrar-se',{
-        methot : 'POST',
+    fetch('http://localhost:5000/conta/cadastrar-se',{
+        method : 'POST',
         body : JSON.stringify({
             email : email,
             senha : senha,
             nome : nome 
         }),
         headers : {
-            'context-type' : 'application/json'
+            'content-type' : 'application/json'
         }
     })
     .then(response => {
