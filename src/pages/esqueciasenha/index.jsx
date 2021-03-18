@@ -3,7 +3,6 @@ import Rodape from '../../components/rodape';
 import { useHistory } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import {Container, Form, Jumbotron, Button} from 'react-bootstrap';
-import './style.css'
 
 const EsqueciaSenha =()=>{
     const history = useHistory();

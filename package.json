@@ -20,7 +20,7 @@
     "react-toast-notifications": "^2.4.3",
     "yup": "^0.32.9"
   },
-  "homepage": "https://Carongo.github.io/Carongo-Web",
+  "homepage": "https://carongo.github.io/Carongo-Web/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",

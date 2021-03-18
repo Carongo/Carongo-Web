@@ -1,6 +1,5 @@
 import React from 'react';
 import { Carousel, Container, Row, Col} from 'react-bootstrap';
-import './index.css'
 
 import Menu from "../../components/menu/index";
 import Rodape from "../../components/rodape/index";

@@ -627,6 +627,7 @@ const DetalhesDaInstituicao = () => {
     const [turmas, setTurmas] = useState([]);
     const [urlImagemFiltro, setUrlImagemFiltro] = useState("");
     const {addToast} = useToasts();
+    const [msg, setMsg] = useState("")
 
     const [showModalCriarTurma, setShowModalCriarTurma] = useState(false);
     const handleCloseModalCriarTurma = () => setShowModalCriarTurma(false);
@@ -806,8 +807,10 @@ const DetalhesDaInstituicao = () => {
         });
         const data = await response.json();
 
-        if(data.dados != undefined)
+        setMsg(data.mensagem)
+        if(data.dados != undefined) {
             setTurmas(data.dados);
+        }
         else 
             addToast(data.mensagem, {appearance: "error", autoDismiss: true});
     }
@@ -848,7 +851,6 @@ const DetalhesDaInstituicao = () => {
                                 <Dropdown.Header style={{color: "black"}}><i className="fas fa-cog"></i> Configurações da instituição</Dropdown.Header>
                                 <ModalCriarTurma/>
                                 <Dropdown.Item onClick={handleShowModalCriarTurma}>Adicionar turma</Dropdown.Item>
-                                <Dropdown.Item>Editar instituição</Dropdown.Item>
                                 <hr></hr>
                             </>
                             :
@@ -896,7 +898,7 @@ const DetalhesDaInstituicao = () => {
                     </FormFile>
                 </Form>
                 {
-                    turmas.turmas !== undefined && turmas.turmas.length > 1 && urlImagemFiltro != ""?
+                    turmas.turmas !== undefined && turmas.turmas.length > 1 && urlImagemFiltro !== ""?
                     <div style={{width: "83vw", display: "flex", justifyContent: "center"}}>
                         <Spinner animation="border" role="status">
                             <span className="sr-only">Loading...</span>
@@ -907,6 +909,9 @@ const DetalhesDaInstituicao = () => {
                     turmas.turmas.map((turma, index) => {
                         return <Turma idTurma={turma.idTurma} nomeTurma={turma.nomeTurma} alunos={turma.alunos} tipo={turmas.tipo} listar={listar} key={index}/>
                     })
+                    :
+                    msg === "Esta instituição ainda está vazia!" ?
+                    <h4 style={{textAlign: "center", marginTop: "50px"}}>Essa instituição ainda está vazia!</h4>
                     :
                     <div style={{width: "83vw", display: "flex", justifyContent: "center"}}>
                         <Spinner animation="border" role="status">
