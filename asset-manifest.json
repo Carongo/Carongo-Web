@@ -1,31 +1,30 @@
 {
   "files": {
-    "main.css": "/Carongo-Web/static/css/main.e20f16fe.chunk.css",
-    "main.js": "/Carongo-Web/static/js/main.96885a2c.chunk.js",
-    "main.js.map": "/Carongo-Web/static/js/main.96885a2c.chunk.js.map",
+    "main.css": "/Carongo-Web/static/css/main.9a1d5a43.chunk.css",
+    "main.js": "/Carongo-Web/static/js/main.ae65a9fd.chunk.js",
+    "main.js.map": "/Carongo-Web/static/js/main.ae65a9fd.chunk.js.map",
     "runtime-main.js": "/Carongo-Web/static/js/runtime-main.2199096a.js",
     "runtime-main.js.map": "/Carongo-Web/static/js/runtime-main.2199096a.js.map",
     "static/css/2.5535d0e7.chunk.css": "/Carongo-Web/static/css/2.5535d0e7.chunk.css",
-    "static/js/2.fa60f9e6.chunk.js": "/Carongo-Web/static/js/2.fa60f9e6.chunk.js",
-    "static/js/2.fa60f9e6.chunk.js.map": "/Carongo-Web/static/js/2.fa60f9e6.chunk.js.map",
+    "static/js/2.ce828ad6.chunk.js": "/Carongo-Web/static/js/2.ce828ad6.chunk.js",
+    "static/js/2.ce828ad6.chunk.js.map": "/Carongo-Web/static/js/2.ce828ad6.chunk.js.map",
     "index.html": "/Carongo-Web/index.html",
-    "precache-manifest.c6bfc3269d5aff439118c171eb7f7f95.js": "/Carongo-Web/precache-manifest.c6bfc3269d5aff439118c171eb7f7f95.js",
+    "precache-manifest.a4d56a34293feb6c254148a8d6c191c6.js": "/Carongo-Web/precache-manifest.a4d56a34293feb6c254148a8d6c191c6.js",
     "service-worker.js": "/Carongo-Web/service-worker.js",
     "static/css/2.5535d0e7.chunk.css.map": "/Carongo-Web/static/css/2.5535d0e7.chunk.css.map",
-    "static/css/main.e20f16fe.chunk.css.map": "/Carongo-Web/static/css/main.e20f16fe.chunk.css.map",
-    "static/js/2.fa60f9e6.chunk.js.LICENSE.txt": "/Carongo-Web/static/js/2.fa60f9e6.chunk.js.LICENSE.txt",
+    "static/css/main.9a1d5a43.chunk.css.map": "/Carongo-Web/static/css/main.9a1d5a43.chunk.css.map",
+    "static/js/2.ce828ad6.chunk.js.LICENSE.txt": "/Carongo-Web/static/js/2.ce828ad6.chunk.js.LICENSE.txt",
     "static/media/Carrousel1.png": "/Carongo-Web/static/media/Carrousel1.e2b1d1f2.png",
     "static/media/Carrousel2.png": "/Carongo-Web/static/media/Carrousel2.f18072f1.png",
     "static/media/eurekinha.png": "/Carongo-Web/static/media/eurekinha.bd8d39ef.png",
-    "static/media/imglog.png": "/Carongo-Web/static/media/imglog.bb9ee605.png",
     "static/media/logo.jpeg": "/Carongo-Web/static/media/logo.21fb3849.jpeg",
     "static/media/styles.css": "/Carongo-Web/static/media/revicons.2feb69cc.eot"
   },
   "entrypoints": [
     "static/js/runtime-main.2199096a.js",
     "static/css/2.5535d0e7.chunk.css",
-    "static/js/2.fa60f9e6.chunk.js",
-    "static/css/main.e20f16fe.chunk.css",
-    "static/js/main.96885a2c.chunk.js"
+    "static/js/2.ce828ad6.chunk.js",
+    "static/css/main.9a1d5a43.chunk.css",
+    "static/js/main.ae65a9fd.chunk.js"
   ]
 }
