@@ -3,9 +3,6 @@ import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
 import {Container, Jumbotron, Form, Button} from 'react-bootstrap';
 
-import imglog from './image/imglog.png'
-
-
 const Perfil =()=>{
     return(
         <div>

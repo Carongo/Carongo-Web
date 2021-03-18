@@ -1,6 +1,6 @@
 import React from "react";
 import{Navbar, Nav, NavDropdown} from 'react-bootstrap';
-import logo from './image/logo.jpeg'
+import logo from '../../assets/img/logo02.png'
 import {useHistory} from 'react-router-dom';
 
 
