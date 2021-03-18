@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Carongo-Web/precache-manifest.4227abf6db8ae3f7b51058918a1f0b9f.js"
+  "/Carongo-Web/precache-manifest.903b56a40853f6d44f55b9a9f771e5be.js"
 );
 
 self.addEventListener('message', (event) => {
