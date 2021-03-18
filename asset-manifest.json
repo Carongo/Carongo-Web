@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Carongo-Web/static/css/main.9a1d5a43.chunk.css",
-    "main.js": "/Carongo-Web/static/js/main.ae65a9fd.chunk.js",
-    "main.js.map": "/Carongo-Web/static/js/main.ae65a9fd.chunk.js.map",
+    "main.js": "/Carongo-Web/static/js/main.7cd80f51.chunk.js",
+    "main.js.map": "/Carongo-Web/static/js/main.7cd80f51.chunk.js.map",
     "runtime-main.js": "/Carongo-Web/static/js/runtime-main.2199096a.js",
     "runtime-main.js.map": "/Carongo-Web/static/js/runtime-main.2199096a.js.map",
     "static/css/2.5535d0e7.chunk.css": "/Carongo-Web/static/css/2.5535d0e7.chunk.css",
     "static/js/2.ce828ad6.chunk.js": "/Carongo-Web/static/js/2.ce828ad6.chunk.js",
     "static/js/2.ce828ad6.chunk.js.map": "/Carongo-Web/static/js/2.ce828ad6.chunk.js.map",
     "index.html": "/Carongo-Web/index.html",
-    "precache-manifest.a4d56a34293feb6c254148a8d6c191c6.js": "/Carongo-Web/precache-manifest.a4d56a34293feb6c254148a8d6c191c6.js",
+    "precache-manifest.4227abf6db8ae3f7b51058918a1f0b9f.js": "/Carongo-Web/precache-manifest.4227abf6db8ae3f7b51058918a1f0b9f.js",
     "service-worker.js": "/Carongo-Web/service-worker.js",
     "static/css/2.5535d0e7.chunk.css.map": "/Carongo-Web/static/css/2.5535d0e7.chunk.css.map",
     "static/css/main.9a1d5a43.chunk.css.map": "/Carongo-Web/static/css/main.9a1d5a43.chunk.css.map",
@@ -25,6 +25,6 @@
     "static/css/2.5535d0e7.chunk.css",
     "static/js/2.ce828ad6.chunk.js",
     "static/css/main.9a1d5a43.chunk.css",
-    "static/js/main.ae65a9fd.chunk.js"
+    "static/js/main.7cd80f51.chunk.js"
   ]
 }
