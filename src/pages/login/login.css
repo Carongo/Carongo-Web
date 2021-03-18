@@ -6,13 +6,13 @@
 
 
 
-.options{
+.op{
     display: flex;
     justify-content: space-around;
     
 }
 
-.container{
+.cont{
     max-width: 400px;
     
 }

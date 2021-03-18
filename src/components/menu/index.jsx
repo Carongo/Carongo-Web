@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import{Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import logo from './image/logo.jpeg'
-import jwt_decode from "jwt-decode";
 import {useHistory} from 'react-router-dom';
 import './index.css'
 
@@ -34,7 +33,7 @@ const Menu=()=> {
 
             );
             //mudança... // se estiver logado e for admin
-        }else if(jwt_decode(token).role === 'admin'){
+        }else if('admin'){
             return(
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Brand href="/pages/home">Carongo</Navbar.Brand>

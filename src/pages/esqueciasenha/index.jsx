@@ -1,7 +1,6 @@
 import React, { useState } from 'react';import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
 import { useHistory } from 'react-router-dom';
-import jwt_decode from "jwt-decode";
 import {Container, Form, Jumbotron, Button} from 'react-bootstrap';
 import './style.css'
 
@@ -25,8 +24,7 @@ const EsqueciaSenha =()=>{
     })
     .then(response => response.json())
     .then(data => {
-        let usuario = jwt_decode(data.token)
-        console.log(usuario)
+       //notifications
         history.push('....')
     })
     .catch(err => console.error(err));

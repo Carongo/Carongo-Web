@@ -1,0 +1,16 @@
+
+
+.container-home{
+    display: flex; 
+    justify-content: space-around;
+    font-style: italic;
+    margin: 20px auto;
+
+    max-width: 900px;
+    max-height: 900px;
+}
+
+
+
+
+

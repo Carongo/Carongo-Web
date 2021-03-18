@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import{ Jumbotron, Container, Form, Button, } from 'react-bootstrap';
 import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
-import imglog from '../login/image/imglog.png';
 
 import { useHistory } from 'react-router-dom';
-import jwt_decode from "jwt-decode";
 
+import './cadastro.css';
 
 
 
@@ -45,10 +44,9 @@ const Cadastro =()=>{
     })
     .then(data => {
         //salva o token no localstorage
-        localStorage.setItem('token-carango', data.token);
-        //decodifica o Data.token
-        let usuario = jwt_decode(data.token)
-        console.log(usuario)
+        localStorage.setItem('token-carango', data.dados);
+
+       
         //redireciona para a ..... apos o login
         history.push('/....')
         
@@ -61,7 +59,7 @@ const Cadastro =()=>{
 
         <div>
             <Menu />
-            <Container className="container">
+            <Container className="cont">
 
                 <Jumbotron  className='jumb'>
 

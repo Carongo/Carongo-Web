@@ -15,8 +15,10 @@
     "react-bootstrap": "^1.5.1",
     "react-dom": "^16.14.0",
     "react-multi-carousel": "^2.6.2",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-toast-notification": "^1.1.4",
     "react-toast-notifications": "^2.4.3",
     "yup": "^0.32.9"
   },

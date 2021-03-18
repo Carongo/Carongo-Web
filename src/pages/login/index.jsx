@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import './index.css';
+import './login.css';
 import { useHistory } from 'react-router-dom';
-import jwt_decode from "jwt-decode";
 
-import imglog from './image/imglog.png'
 
 
 
@@ -53,7 +51,7 @@ const Login =() =>{
             
     <div>
         <Menu />
-        <Container className="container">
+        <Container className="cont">
        
       <Jumbotron  className='jumb'>
         <div className='text-center' >
@@ -74,9 +72,9 @@ const Login =() =>{
       <Form.Control value={senha} onChange={event=> setSenha(event.target.value)} type="password" placeholder="Digite sua senha" />
       </Form.Group>
 
-      <div className="options" >
-          <a href="/pages/cadastro">Cadastre-se</a>
-          <a href="/pages/esqueciasenha">Esqueci minha senha</a>
+      <div className="op" >
+          <a href="/cadastro">Cadastre-se</a>
+          <a href="/esqueci-minha-senha">Esqueci minha senha</a>
       </div>
 
       <Button style={{marginTop : '18px'}} onClick={event => logar(event)}  className='button' variant="dark" type="submit">

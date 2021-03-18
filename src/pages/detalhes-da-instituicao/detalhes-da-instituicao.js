@@ -9,7 +9,7 @@ import {useToasts} from "react-toast-notifications";
 import firebase from "firebase";
 import {useHistory} from "react-router-dom";
 import * as Yup from "yup";
-import "./index.css";
+import "./detalhes-instituicao.css";
 import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
 
