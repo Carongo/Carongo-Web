@@ -3,7 +3,8 @@ import {Container, ListGroup, Spinner, Form, Col, InputGroup, FormControl} from 
 import { useParams } from "react-router";
 import {url} from "../../utils/constants";
 import {useToasts} from "react-toast-notifications";
-
+import Menu from "../../components/menu/index"
+import Rodape from "../../components/rodape/index"
 import jwt_decode from "jwt-decode";
 
 const Pessoa = ({id, idUI, nome, meuId, adm, idInstituicao, listar}) => {
@@ -125,6 +126,7 @@ const PessoasDaInstituicao = () => {
 
     return (
         <>
+            <Menu pagina="Pessoas" idInstituicao={idInstituicao}/>
             {
                 adm && <>
                     <Form style={{marginTop: "50px"}}> 
@@ -181,6 +183,7 @@ const PessoasDaInstituicao = () => {
                     </div>
                 }
             </Container>
+            <Rodape/>
         </>
     )
 }

@@ -837,7 +837,8 @@ const DetalhesDaInstituicao = () => {
 
     return (
         <>
-            <Container style={{width: "95vw"}}>
+            <Menu idInstituicao={idInstituicao} pagina="Detalhes"/>
+            <Container style={{width: "95vw", marginTop: "25px", minHeight: "90vh"}}>
             <div style={{textAlign: "right"}}>
                 <Dropdown>
                     <Dropdown.Toggle variant="light" id="dropdown-basic">
@@ -920,6 +921,7 @@ const DetalhesDaInstituicao = () => {
                     </div>
                 }
             </Container>
+            <Rodape/>
         </>
     )
 }

@@ -5,6 +5,7 @@ import Rodape from '../../components/rodape';
 import { Form, Button, Container, Jumbotron } from 'react-bootstrap';
 import {url} from "../../utils/constants";
 import {useToasts} from "react-toast-notifications";
+import './login.css';
 
 const Login =() =>{
     const history = useHistory();
@@ -49,7 +50,7 @@ const Login =() =>{
             
         <div>
             <Menu />
-            <Container className="container">
+            <Container className="cont">
                 <Jumbotron  className='jumb'>
                     <div className='text-center' >
                         <h1 className="text-center">
@@ -67,13 +68,13 @@ const Login =() =>{
                             <Form.Control value={senha} onChange={event=> setSenha(event.target.value)} type="password" placeholder="Digite sua senha" />
                         </Form.Group>
 
-                        <div className="options" >
-                            <a href="/pages/cadastro">Cadastre-se</a>
-                            <a href="/pages/esqueciasenha">Esqueci minha senha</a>
-                        </div>
+                        
                         <Button style={{marginTop : '18px'}} onClick={event => logar(event)}  className='button' variant="dark" type="submit">
                             Entrar
-                        </Button>
+                        </Button><div className="op" style={{marginTop: "25px"}} >
+                            <a href="/cadastro">Cadastre-se</a>
+                            <a href="/esqueci-minha-senha">Esqueci minha senha</a>
+                        </div>
                     </Form>
                 </Jumbotron>
             </Container>

@@ -11,6 +11,7 @@ import Home from './pages/home/index';
 import DetalhesDaInstituicao from "./pages/detalhes-da-instituicao/detalhes-da-instituicao";
 import PessoasDaInstituicao from "./pages/pessoas-da-instituicao/pessoas-da-instituicao";
 import MinhasInstituicoes from "./pages/minhas-instituicoes/minhas-instituicoes";
+import RedefinirSenha from './pages/redefinir-senha/redefinir-senha';
 import EsqueciaSenha from './pages/esqueciasenha';
 import Perfil from './pages/perfil';
 
@@ -47,10 +48,10 @@ const routing = (
       <RotaPrivadaNaoLogado exact path="/" component={Home} />
       <RotaPrivadaNaoLogado path="/login" component={Login} /> 
       <RotaPrivadaNaoLogado path="/cadastro" component={Cadastro} />
-      <RotaPrivadaNaoLogado path="/esqueci-minha-senha" component={EsqueciaSenha} /> 
-      <RotaPrivadaNaoLogado path="/esqueci-minha-senha/redefinir-senha/token=:jwt" component={Cadastro} />
+      <RotaPrivadaNaoLogado exact path="/esqueci-minha-senha" component={EsqueciaSenha} /> 
+      <RotaPrivadaNaoLogado path="/esqueci-minha-senha/redefinir-senha/:jwt" component={RedefinirSenha} />
 
-      <RotaPrivadaLogado path="/minhas-instituicoes" component={MinhasInstituicoes} /> {/*http://localhost:5000/, http://localhost:5000/instituicao/entrar-na-instituicao*/}
+      <RotaPrivadaLogado path="/minhas-instituicoes" component={MinhasInstituicoes} /> 
       <RotaPrivadaLogado path="/detalhes-da-instituicao/:idInstituicao" component={DetalhesDaInstituicao} />
       <RotaPrivadaLogado path="/pessoas-da-instituicao/:idInstituicao" component={PessoasDaInstituicao} />
       <RotaPrivadaLogado path="/meu-perfil" component={Perfil} /> {/*http://localhost:5000/conta/listar-meu-perfil, http://localhost:5000/conta/alterar-usuario, http://localhost:5000/conta/alterar-senha, http://localhost:5000/conta/deletar-conta*/}

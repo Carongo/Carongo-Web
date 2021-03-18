@@ -4,10 +4,12 @@
 import React from "react";
 //Importa o css específico do index. O Global está em App.css
 
-import logo from '../../assets/img/logo.png'
+import logo from '../../assets/img/logo.jpeg'
+
+import "./rodape.css"
 
 
-import {Col, Row, Container} from 'react-bootstrap';
+import {Col} from 'react-bootstrap';
 
 const Rodape =()=>{
     return(

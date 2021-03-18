@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react";
 import {url} from "../../utils/constants";
 import {InputGroup, Container, Dropdown, Col, Form, FormControl, Spinner, Row, Card, Modal, Button} from "react-bootstrap";
 import {useToasts} from "react-toast-notifications";
-
+import Menu from "../../components/menu/index";
+import Rodape from "../../components/rodape/index"
 const Instituicao = ({id, nome, descricao, tipoUsuario}) => {
     return (
         <Card style={{ width: '18rem', margin: "20px auto" }}>
@@ -22,6 +23,7 @@ const MinhasInstituicoes = () => {
     const [nome, setNome] = useState("");
     const [instituicoes, setInstituicoes] = useState([]);
     const {addToast} = useToasts();
+    const [msg, setMsg] = useState("");
 
     const [showModalCriarInstituicao, setShowModalCriarInstituicao] = useState(false);
     const handleCloseModalCriarInstituicao = () => setShowModalCriarInstituicao(false);
@@ -189,13 +191,17 @@ const MinhasInstituicoes = () => {
                 appearance : 'error',
                 autoDismiss : true
             })
-        else
+        else{
+            setMsg(data.mensagem)
             setInstituicoes(data)
+        }
+            
     }
 
     return (
         <>
-            <Container style={{width: "95vw"}}>
+            <Menu/>
+            <Container style={{width: "95vw", marginTop: "25px", minHeight: "90vh"}}>
                 <div style={{textAlign: "right"}}>
                     <Dropdown>
                         <Dropdown.Toggle variant="light" id="dropdown-basic">
@@ -222,12 +228,18 @@ const MinhasInstituicoes = () => {
                 <Container fluid>
                     <Row style={{display: "flex", flexWrap: "wrap"}}>
                         {
+                            msg ==="Você não faz parte de nenhuma instituição!"?
+                            <div style={{width: "100%", marginTop: 25}}>
+                                
+                            <h3 style={{textAlign: "center"}}>Você ainda não faz parte de nenhuma instituição!</h3>
+                            </div>:
                             instituicoes.dados === undefined?
                             <div style={{width: "83vw", display: "flex", justifyContent: "center"}}>
                                 <Spinner animation="border" role="status">
                                     <span className="sr-only">Loading...</span>
                                 </Spinner>
                             </div>
+                            
                             :
                             instituicoes.dados.map((instituicao, index) => {
                                 return <Instituicao id={instituicao.id} nome={instituicao.nome} descricao={instituicao.descricao} tipoUsuario={instituicao.tipoUsuario}/>
@@ -236,6 +248,7 @@ const MinhasInstituicoes = () => {
                     </Row>
                 </Container>
             </Container>
+                <Rodape/>
         </>
     )
 }

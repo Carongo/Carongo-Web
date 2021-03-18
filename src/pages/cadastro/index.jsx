@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import{ Jumbotron, Container, Form, Button, } from 'react-bootstrap';
 import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
+import {useToasts} from "react-toast-notifications";
+
+import "./cadastro.css"
 
 import { useHistory } from 'react-router-dom';
-import jwt_decode from "jwt-decode";
 
 
 
@@ -19,8 +21,9 @@ const Cadastro =()=>{
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [nome, setNome] = useState('');
+  const {addToast} = useToasts();
 
-  const Cadastrar =(event)=>{
+  const cadastrar =(event)=>{
 
     event.preventDefault();
     console.log(nome + email + senha);
@@ -42,15 +45,21 @@ const Cadastro =()=>{
        }
        alert('dados invalidos');
     })
-    .then(data => {
-        //salva o token no localstorage
-        localStorage.setItem('token-carango', data.token);
-        //decodifica o Data.token
-        let usuario = jwt_decode(data.token)
-        console.log(usuario)
-        //redireciona para a ..... apos o login
-        history.push('/....')
-        
+    .then(dados => {
+        if(dados.sucesso){
+            addToast(dados.mensagem, {
+                appearance : 'success',
+                autoDismiss : true
+            });
+            localStorage.setItem('token-carongo', dados.dados);
+            history.push('/minhas-instituicoes')
+        } 
+        else {
+            addToast(dados.mensagem, {
+                appearance : 'error',
+                autoDismiss : true
+            })
+        }
     })
     .catch(err => console.error(err));
 
@@ -60,7 +69,7 @@ const Cadastro =()=>{
 
         <div>
             <Menu />
-            <Container className="container">
+            <Container className="cont">
 
                 <Jumbotron  className='jumb'>
 
@@ -87,10 +96,13 @@ const Cadastro =()=>{
               <Form.Control value={senha} onChange={event=> setSenha(event.target.value)} type="password" placeholder="Digite sua senha" />
             </Form.Group>
             
-            <Button  onClick={event => Cadastrar(event)} className='button' variant="dark" type="submit">
+            <Button  onClick={event => cadastrar(event)} className='button' variant="dark" type="submit">
               Cadastrar
             </Button>
+            <div style={{marginTop: "25px"}}>
+                            <a href="/login">Já é cadastrado? Faça login</a>
 
+            </div>
   
         </Form>
 
