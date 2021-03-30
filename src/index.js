@@ -13,7 +13,6 @@ import PessoasDaInstituicao from "./pages/pessoas-da-instituicao/pessoas-da-inst
 import MinhasInstituicoes from "./pages/minhas-instituicoes/minhas-instituicoes";
 import RedefinirSenha from './pages/redefinir-senha/redefinir-senha';
 import EsqueciaSenha from './pages/esqueciasenha';
-import Perfil from './pages/perfil';
 
 import { ToastProvider } from 'react-toast-notifications';
 
@@ -54,7 +53,6 @@ const routing = (
       <RotaPrivadaLogado path="/minhas-instituicoes" component={MinhasInstituicoes} /> 
       <RotaPrivadaLogado path="/detalhes-da-instituicao/:idInstituicao" component={DetalhesDaInstituicao} />
       <RotaPrivadaLogado path="/pessoas-da-instituicao/:idInstituicao" component={PessoasDaInstituicao} />
-      <RotaPrivadaLogado path="/meu-perfil" component={Perfil} /> {/*http://localhost:5000/conta/listar-meu-perfil, http://localhost:5000/conta/alterar-usuario, http://localhost:5000/conta/alterar-senha, http://localhost:5000/conta/deletar-conta*/}
     </Switch>
   </Router>
 )
