@@ -1,6 +1,6 @@
 Aplicação web do projeto Carongo desenvolvida em React integrada à API de serviço cognitivo de reconhecimento facial do Azure.
 
-Vídeo demonstrativo: [Clique aqui para abrir o vídeo]("https://drive.google.com/file/d/1arULWXfIVUdkSuzLAXGrRAkEhIDOC3uT/view?usp=sharing")
+Vídeo demonstrativo: [Clique aqui para abrir o vídeo](https://drive.google.com/file/d/1arULWXfIVUdkSuzLAXGrRAkEhIDOC3uT/view?usp=sharing)
 
 ## ✅ Proposta
 
